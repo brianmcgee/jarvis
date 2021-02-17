@@ -1,0 +1,10 @@
+type Team implements Resource {
+    gid: ID!
+    name: String!
+    description: String
+    descriptionHtml: String
+    users: [User]
+    projects: [Project]
+    workspaceId: ID!
+    workspace: Workspace
+}

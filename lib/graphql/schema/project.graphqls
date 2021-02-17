@@ -1,0 +1,9 @@
+type Project implements Resource {
+    gid: ID!
+    name: String!
+    workspaceId: String!
+    workspace: Workspace
+    color: String
+    teamId: ID
+    team: Team
+}

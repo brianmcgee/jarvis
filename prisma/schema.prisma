@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Workspace {
+    gid             String          @id
+    name            String
+    teams           Team[]
+    isOrganization  Boolean
+}
+
+
+model Team {
+    gid             String          @id
+    name            String
+    description     String?
+    descriptionHtml String?
+
+    users           User[]
+    projects        Project[]
+    createdAt       DateTime?
+
+    workspaceId     String
+    workspace       Workspace    @relation(fields: [workspaceId], references: [gid])
+}
+
+
+model User {
+    gid             String          @id
+    name            String
+    email           String?
+    photo           String?
+    teams           Team[]
+    followingTasks  Task[]          @relation("TaskFollowers")
+    followingTags   Tag[]           @relation("TagFollowers")
+    assignedTasks   Task[]          @relation("TaskAssignment")
+}
+
+model Tag {
+    gid             String          @id
+    name            String
+    color           String
+    followers       User[]          @relation("TagFollowers")
+    permalink       String
+    workspaceId     String
+    workspace       Workspace       @relation(fields: [workspaceId], references: [gid])
+}
+
+
+model Project {
+    gid             String          @id
+    name            String
+    workspaceId     String
+    workspace       Workspace       @relation(fields: [workspaceId], references: [gid])
+    color           String?
+    teamId          String?
+    team            Team?           @relation(fields: [teamId], references: [gid])
+    createdAt       DateTime?
+    tasks           Task[]
+}
+
+model Task {
+    gid             String          @id
+    name            String
+    notes           String
+    notesHtml       String
+    liked           Boolean
+    numLikes        Int
+    numSubtasks     Int
+    // todo custom fields
+    followers       User[]          @relation("TaskFollowers")
+    parentId        String?
+    parent          Task?           @relation("ParentTask", fields: [parentId], references: [gid])
+    subtasks        Task[]          @relation("ParentTask")
+    permalinkUrl    String
+
+    assigneeId      String?
+    assignee        User?           @relation("TaskAssignment", fields: [assigneeId], references: [gid])
+
+    workspaceId     String
+    workspace       Workspace       @relation(fields: [workspaceId], references: [gid])
+
+    projects        Project[]
+
+    createdAt       DateTime
+    modifiedAt      DateTime
+    startOn         DateTime?
+    dueAt           DateTime?
+    completed       Boolean
+    completedAt     DateTime?
+
+    @@index([createdAt])
+    @@index([modifiedAt])
+    @@index([startOn])
+    @@index([dueAt])
+    @@index([completedAt])
+    @@index([completed])
+
+}
+

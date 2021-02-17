@@ -1,0 +1,58 @@
+fragment UserSummary on User {
+    gid
+    name
+    photo
+}
+
+fragment TaskSummary on Task {
+    gid
+    name
+    completed
+    liked
+    numLikes
+    numSubtasks
+    assignee {
+        ...UserSummary
+    }
+    workspace {
+        gid
+        name
+    }
+    projects {
+        gid
+        name
+        color
+    }
+    subtasks {
+        gid
+        name
+        completed
+        liked
+        numLikes
+        assignee {
+            ...UserSummary
+        }
+        followers {
+            ...UserSummary
+        }
+        dueAt
+        modifiedAt
+    }
+    followers {
+        ...UserSummary
+    }
+    modifiedAt
+    dueAt
+}
+
+query Dashboard {
+    tasksForToday {
+        ...TaskSummary
+    }
+    upcomingTasks {
+        ...TaskSummary
+    }
+    tasksForLater {
+        ...TaskSummary
+    }
+}

@@ -1,0 +1,4 @@
+interface Resource {
+    gid: ID!
+    name: String!
+}

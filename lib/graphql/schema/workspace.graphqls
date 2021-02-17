@@ -1,0 +1,6 @@
+type Workspace implements Resource {
+    gid: ID!
+    name: String!
+    teams: [Team]
+    isOrganization: Boolean!
+}

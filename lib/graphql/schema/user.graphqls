@@ -1,0 +1,7 @@
+
+type User implements Resource {
+    gid: ID!
+    name: String!
+    email: String!
+    photo: String!
+}

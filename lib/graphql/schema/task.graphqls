@@ -1,0 +1,30 @@
+type Task implements Resource {
+    gid: ID!
+    name: String!
+    notes: String!
+    notesHtml: String!
+    liked: Boolean!
+    numLikes: Int!
+    numSubtasks: Int!
+
+    followers: [User]
+    parentId: ID
+    parent: Task
+    subtasks: [Task]
+
+    permalinkUrl: String!
+
+    assigneeId: ID
+    assignee: User
+    workspaceId: ID!
+    workspace: Workspace
+
+    projects: [Project]
+
+    createdAt: Date!
+    modifiedAt: Date!
+    startOn: Date
+    dueAt: Date
+    completed: Boolean!
+    completedAt: Date
+}

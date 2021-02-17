@@ -1,0 +1,13 @@
+scalar BigInt
+
+scalar Date
+
+type Query {
+    tasksForToday: [Task]
+    upcomingTasks: [Task]
+    tasksForLater: [Task]
+}
+
+type Mutation {
+    updateName(name: String!): User!
+}
