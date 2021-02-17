@@ -26,6 +26,8 @@ Create a file called `.env.local` in the root directory and set your Asana acces
 ASANA_TOKEN=xxxxxxxxx
 ```
 
+To generate an access token you can follow the instructions [here](https://developers.asana.com/docs/personal-access-token)
+
 ## Installation
 
 ```terminal
