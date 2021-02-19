@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {GetStaticProps} from 'next';
+import {GetServerSideProps, GetStaticProps} from 'next';
 import {initializeApollo} from "../lib/graphql/client/apollo";
 import {DashboardDocument, TaskSummaryFragment, useDashboardQuery} from "../lib/graphql/client/tasks.graphql";
 import dayjs from "dayjs";
@@ -128,7 +128,7 @@ export default function Home() {
 }
 
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const apolloClient = initializeApollo()
 
@@ -139,6 +139,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
             initialApolloState: apolloClient.cache.extract(),
-        },
+        }
     }
 }
