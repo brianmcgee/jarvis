@@ -1,4 +1,4 @@
-import { MutationResolvers, QueryResolvers } from "./schema/type-defs.graphqls";
+import { MutationResolvers, QueryResolvers } from "./type-defs.graphqls";
 import { ResolverContext } from "./client/apollo";
 import { PrismaClient } from ".prisma/client";
 import { GraphQLScalarType, Kind } from "graphql";
