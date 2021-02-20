@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "lint": "eslint '*/**/*.{js,ts,tsx,yml,yaml,json}' --quiet",
+    "lint": "eslint '*/**/*.{js,ts,tsx,yml,yaml,json}'",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx,yml,yaml}' --quiet --fix",
     "dev": "graphql-let && next dev",
     "build": "graphql-let && next build",
@@ -70,6 +70,7 @@
     "eslint-plugin-yaml": "^0.3.0",
     "graphql-let": "^0.16.3",
     "graphql-tag": "^2.11.0",
+    "husky": "^5.0.9",
     "js-yaml-loader": "^1.2.2",
     "postcss-custom-properties": "^11.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -80,5 +81,15 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3",
     "yaml-loader": "^0.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
